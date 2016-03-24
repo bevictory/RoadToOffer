@@ -22,8 +22,8 @@ int com(struct help *p1,struct help *p2){
         {
             return 1;
         }
-        if(strlen(p1->node->str) ==strlen(p2->node->str)){
-            if(strcmp(p2->node->str,p1->node->str)){
+        if(strlen(p1->node->str) == strlen(p2->node->str)){
+            if(strcmp(p1->node->str,p2->node->str) <0){
                 return 1;
             }
         }
@@ -49,12 +49,24 @@ struct TreeNode * qsort1(struct help *p, int n ,int k)
     *(p+i) = h;
 
     if(i ==(k-1)){
+        int j=0;
 
+        for( j=0;j<inde; j++){
+            printf("sorted %s\n",pall[j].node->str);
+        }
         return (p+i)->node;
     }else if(i >(k-1)){
+        int j=0;for( j=0;j<inde; j++){
+            printf("sorted %s\n",pall[j].node->str);
+        }
+        printf("--------- pre");
         return qsort1(p,i,k);
     }else{
-        return qsort1(p+i+1,n-i,k-i-1);
+        int j=0;for( j=0;j<inde; j++){
+            printf("sorted %s\n",pall[j].node->str);
+        }
+        printf("--------- back");
+        return qsort1(p+i+1,n-i-1,k-i-1);
     }
 }
 void inorder(struct TreeNode *node, char *substr)
@@ -129,6 +141,7 @@ int main()
     left->str="cbcab";
     right->str="babefbaad";
     char *substr = "ab";
+
     /*struct help p1 = {2,root};
     struct help p2 = {2,left};
     struct help p3 = {3,right};
@@ -136,7 +149,7 @@ int main()
     p[0]=p1;p[1]=p2;p[2]=p3;*/
     printf("%s",findNode(root,substr,3)->str);
 
-    printf("%d",strcmp("abced","cdcab"));
+    //printf("%s",s1.str);
     return 0;
    //inorder(root,substr);
 }
