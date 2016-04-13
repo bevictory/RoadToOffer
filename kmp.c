@@ -18,7 +18,7 @@ int findSubNum(char *str, char *substr,int next[])
     getnext(substr,next);
     int length = strlen(substr);
     int i=0,j=0,num=0;
-    for(i = 0; i< length; i++)
+    for(i = 0; i< strlen(str); i++)
     {
         while(j>0&&((*(str+i))!=(*(substr+j))))
             j=next[j];
@@ -29,12 +29,13 @@ int findSubNum(char *str, char *substr,int next[])
         }
 
     }
+    return num;
 }
 int main()
 {
     char* str  ="abefabeabcdabe";
-    char *substr="abe";
-    int *next = (int *)malloc(sizeof(int)*strlen(substr));
+    char *substr="ab";
+    int *next = (int *)malloc(sizeof(int)*(strlen(substr)+1));
     printf("%d",findSubNum(str,substr,next));
     return 0;
 }

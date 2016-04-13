@@ -49,23 +49,23 @@ struct TreeNode * qsort1(struct help *p, int n ,int k)
     *(p+i) = h;
 
     if(i ==(k-1)){
-        int j=0;
+        /*int j=0;
 
         for( j=0;j<inde; j++){
             printf("sorted %s\n",pall[j].node->str);
-        }
+        }*/
         return (p+i)->node;
     }else if(i >(k-1)){
-        int j=0;for( j=0;j<inde; j++){
+        /*int j=0;for( j=0;j<inde; j++){
             printf("sorted %s\n",pall[j].node->str);
         }
-        printf("--------- pre");
+        printf("--------- pre");*/
         return qsort1(p,i,k);
     }else{
-        int j=0;for( j=0;j<inde; j++){
+        /*int j=0;for( j=0;j<inde; j++){
             printf("sorted %s\n",pall[j].node->str);
         }
-        printf("--------- back");
+        printf("--------- back");*/
         return qsort1(p+i+1,n-i-1,k-i-1);
     }
 }
@@ -79,7 +79,7 @@ void inorder(struct TreeNode *node, char *substr)
     int num =findSubNum(node->str,substr,next);
     if(num>0){struct help h = {num,node};
     pall[inde++] = h;}
-    printf("%s %d\n",node->str,num);
+    //printf("%s %d\n",node->str,num);
     inorder(node->right,substr);
 
 }
@@ -117,11 +117,11 @@ int findSubNum(char *str, char *substr,int next[])
 
 struct TreeNode *findNode(struct TreeNode *node, char *substr,int n){
     inorder(node,substr);
-    printf("find node num %d\n",inde);
+    /*printf("find node num %d\n",inde);
     int i=0;
     for( i=0;i<inde; i++){
         printf("%s\n",pall[i].node->str);
-    }
+    }*/
     qsort1(pall,inde,n);
 
 }
@@ -131,12 +131,18 @@ int main()
     struct TreeNode *root = (struct TreeNode*)malloc(sizeof(struct TreeNode)*1);
     struct TreeNode *left = (struct TreeNode*)malloc(sizeof(struct TreeNode)*1);
     struct TreeNode *right = (struct TreeNode*)malloc(sizeof(struct TreeNode)*1);
+     struct TreeNode *leftright = (struct TreeNode*)malloc(sizeof(struct TreeNode)*1);
     root->left=left;
     root->right =right;
     left->left=NULL;
     left->right=NULL;
     right->left=NULL;
     right->right=NULL;
+    left->right = leftright;
+    left->left = NULL;
+    leftright->right =NULL;
+    leftright->left =NULL;
+    leftright->str="abedf";
     root->str="abced";
     left->str="cbcab";
     right->str="babefbaad";
@@ -147,7 +153,7 @@ int main()
     struct help p3 = {3,right};
     //printf("%d",com(&p1,&p2));
     p[0]=p1;p[1]=p2;p[2]=p3;*/
-    printf("%s",findNode(root,substr,3)->str);
+    printf("%s",findNode(root,substr,4)->str);
 
     //printf("%s",s1.str);
     return 0;
